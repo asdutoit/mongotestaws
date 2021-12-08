@@ -1,13 +1,11 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import Button from "@mui/material/Button";
-import ProTip from "../src/ProTip";
 import Link from "../src/Link";
-import Copyright from "../src/Copyright";
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
@@ -138,11 +136,19 @@ const top100Films = [
 ];
 
 export default function About({ people }) {
+  const [time, setTime] = useState(0);
+
+  const handleClick = async () => {
+    const response = await fetch("/api/users");
+    const users = await response.json();
+    setTime(users.time.toFixed(2));
+  };
+
   return (
     <Container maxWidth="sm">
       <Box sx={{ my: 4 }}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Next.js v5 example
+          Next.js v5 example About Page
         </Typography>
         <Button variant="contained" component={Link} noLinkStyle href="/">
           Go to the main page
@@ -150,8 +156,11 @@ export default function About({ people }) {
         <div>
           <TextField label="Name" size="small" sx={{ my: 4 }} />
         </div>
-
         <div>
+          <h1>Response Time: {time} ms</h1>
+        </div>
+
+        {/* <div>
           <Autocomplete
             disablePortal
             id="combo-box-demo"
@@ -160,10 +169,9 @@ export default function About({ people }) {
             renderInput={(params) => <TextField {...params} label="People" />}
             size="small"
           />
-        </div>
+        </div> */}
 
-        <ProTip />
-        <Copyright />
+        <Button onClick={handleClick}>Fetch</Button>
       </Box>
     </Container>
   );

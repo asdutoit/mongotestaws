@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress": "cypress open",
+    "cypress:headless": "cypress run --record --key d4c8208a-6c20-48bf-9298-1510334de60b"
   },
   "dependencies": {
     "@emotion/cache": "^11.5.0",
@@ -16,11 +18,12 @@
     "@mui/material": "^5.1.0",
     "clsx": "^1.1.1",
     "mongodb": "^4.1.4",
-    "next": "12.0.3",
+    "next": "^12.0.7",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "cypress": "^9.1.1",
     "eslint": "7.32.0",
     "eslint-config-next": "12.0.3"
   }
