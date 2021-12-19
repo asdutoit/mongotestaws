@@ -137,10 +137,14 @@ const top100Films = [
 
 export default function About({ people }) {
   const [time, setTime] = useState(0);
+  const [timeRes, setTimeRes] = useState(0);
 
   const handleClick = async () => {
+    let time1 = new Date().getTime();
     const response = await fetch("/api/users");
     const users = await response.json();
+    time1 = new Date().getTime() - time1;
+    setTimeRes(time1);
     setTime(users.time.toFixed(2));
   };
 
@@ -157,7 +161,8 @@ export default function About({ people }) {
           <TextField label="Name" size="small" sx={{ my: 4 }} />
         </div>
         <div>
-          <h1>Response Time: {time} ms</h1>
+          <h1>DB Query Time: {time} ms</h1>
+          <h1>Response Time: {timeRes} ms</h1>
         </div>
 
         {/* <div>
